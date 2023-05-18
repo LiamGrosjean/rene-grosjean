@@ -1,8 +1,130 @@
-import animateTitle from './features/animateTitle'
-import createBadge from './features/createBasge'
 import './styles/style.css'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
+import SplitText from 'gsap/SplitText'
+import $ from 'jquery'
 
-console.log('Welcome to Vite + JS + Webflow!')
+gsap.registerPlugin(ScrollTrigger, SplitText)
 
-createBadge()
-animateTitle()
+let text = new SplitText('.quote', {
+  type: 'words',
+})
+
+/* Scrollbar animations*/
+$('.scrollbar__wrapper').each(function () {
+  let triggerElement = $(this)
+  let targetElement = $('.scrolling-circle')
+
+  let tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: triggerElement,
+      // trigger element - viewport
+      start: 'top 50%',
+      end: 'bottom 50%',
+      scrub: true,
+    },
+  })
+  tl.from(targetElement, {
+    top: '0',
+    ease: 'none',
+  })
+})
+
+console.log(text)
+let index
+console.log(index)
+
+/* Quote bg color animation */
+$('.section.align-top').each(function () {
+  let triggerElement = $(this)
+  let targetElement2 = $('body')
+
+  let tl3 = gsap.timeline({
+    scrollTrigger: {
+      trigger: triggerElement,
+      // trigger element - viewport
+      start: 'top 50%',
+      end: 'top top',
+      scrub: 1,
+    },
+  })
+  tl3.fromTo(
+    targetElement2,
+    {
+      backgroundColor: '#45693A',
+      color: '#ccd197',
+    },
+    {
+      backgroundColor: '#ccd197',
+      color: '#45693A',
+    }
+  )
+})
+
+/* Quote animations*/
+$('.section.align-top').each(function () {
+  let triggerElement = $(this)
+  let targetElement = $(text.words)
+
+  let tl2 = gsap.timeline({
+    scrollTrigger: {
+      trigger: triggerElement,
+      // trigger element - viewport
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: true,
+      pin: '.quote-wrapper',
+    },
+  })
+  tl2.from(targetElement, {
+    opacity: 0.3,
+    stagger: 1,
+    ease: 'none',
+  })
+})
+
+/* 1st image grid bg color animation */
+$('.section.is--grid').each(function () {
+  let triggerElement = $(this)
+  let targetElement = $('body')
+
+  let tl6 = gsap.timeline({
+    scrollTrigger: {
+      trigger: triggerElement,
+      // trigger element - viewport
+      start: 'bottom 25%',
+      end: 'bottom 50%',
+      scrub: 1,
+    },
+  })
+  tl6.fromTo(
+    targetElement,
+    {
+      backgroundColor: '#ccd197',
+      color: '#45693A',
+    },
+    {
+      backgroundColor: '#45693A',
+      color: '#ccd197',
+    }
+  )
+})
+
+/* DBP animations*/
+$('.section.is--vietnam').each(function () {
+  let triggerElement = $(this)
+  let targetElement = $('.absolute-image')
+
+  let tl10 = gsap.timeline({
+    scrollTrigger: {
+      trigger: triggerElement,
+      // trigger element - viewport
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: true,
+    },
+  })
+  tl10.from(targetElement, {
+    y: '100%',
+  })
+})
