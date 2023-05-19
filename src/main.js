@@ -1,10 +1,11 @@
 import './styles/style.css'
 import gsap from 'gsap'
+import ScrambleText from 'gsap/ScrambleTextPlugin'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import SplitText from 'gsap/SplitText'
 import $ from 'jquery'
 
-gsap.registerPlugin(ScrollTrigger, SplitText)
+gsap.registerPlugin(ScrollTrigger, SplitText, ScrambleText)
 
 let text = new SplitText('.quote', {
   type: 'words',
@@ -89,6 +90,25 @@ $('.section.align-top').each(function () {
   })
 })
 
+/* 1st image grid image position */
+$('.section.is--grid').each(function () {
+  let triggerElement = $(this)
+  let targetElement = $('.mt-negative')
+
+  let tl6 = gsap.timeline({
+    scrollTrigger: {
+      trigger: triggerElement,
+      // trigger element - viewport
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: true,
+    },
+  })
+  tl6.to(targetElement, {
+    marginTop: '-6.5rem',
+  })
+})
+
 /* 1st image grid bg color animation */
 $('.section.is--grid').each(function () {
   let triggerElement = $(this)
@@ -98,8 +118,8 @@ $('.section.is--grid').each(function () {
     scrollTrigger: {
       trigger: triggerElement,
       // trigger element - viewport
-      start: 'bottom 25%',
-      end: 'bottom 50%',
+      start: 'bottom 75%',
+      end: 'bottom 25%',
       scrub: 1,
     },
   })
@@ -126,11 +146,57 @@ $('.section.is--vietnam').each(function () {
       trigger: triggerElement,
       // trigger element - viewport
       start: 'top bottom',
-      end: 'bottom top',
+      end: 'top top',
       scrub: true,
     },
   })
   tl5.from(targetElement, {
     y: '100%',
+  })
+})
+
+/* Scramble Text */
+
+$('.scramble__text').each(function () {
+  let triggerElement = $(this)
+  let targetElement = $('.scramble__text')
+
+  let tl7 = gsap.timeline({
+    scrollTrigger: {
+      trigger: triggerElement,
+      // trigger element - viewport
+      start: 'top 80%',
+      end: 'top 50%',
+      scrub: true,
+    },
+  })
+  tl7.to(targetElement, {
+    scrambleText: {
+      text: 'Après une lutte acharnée, il se rend maître de la DZ (Drop Zone) permettant la reprise des héliportages.',
+      chars: 'lowerCase',
+      revealDelay: 0.2,
+      tweenLength: true,
+    },
+  })
+})
+
+/* Bullet section full screen image */
+$('.bullet__section').each(function () {
+  let triggerElement = $(this)
+  let targetElement = $('.bullet-image__wrap')
+
+  let tl10 = gsap.timeline({
+    scrollTrigger: {
+      trigger: triggerElement,
+      // trigger element - viewport
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: true,
+    },
+  })
+  tl10.from(targetElement, {
+    width: '100%',
+    borderTopLeftRadius: '0rem',
+    borderTopRightRadius: '0rem',
   })
 })
