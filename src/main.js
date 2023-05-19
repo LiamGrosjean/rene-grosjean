@@ -10,6 +10,12 @@ let text = new SplitText('.quote', {
   type: 'words',
 })
 
+document.addEventListener('DOMContentLoaded', function () {
+  let body = document.querySelector('body')
+  body.style.backgroundColor = '#45693A'
+  body.style.color = '#ccd197'
+})
+
 /* Scrollbar animations*/
 $('.scrollbar__wrapper').each(function () {
   let triggerElement = $(this)
@@ -34,12 +40,12 @@ console.log(text)
 let index
 console.log(index)
 
-/* Quote bg color animation */
+/* Dark to light bg Color */
 $('.section.align-top').each(function () {
   let triggerElement = $(this)
   let targetElement2 = $('body')
 
-  let tl3 = gsap.timeline({
+  let tl2 = gsap.timeline({
     scrollTrigger: {
       trigger: triggerElement,
       // trigger element - viewport
@@ -48,7 +54,7 @@ $('.section.align-top').each(function () {
       scrub: 1,
     },
   })
-  tl3.fromTo(
+  tl2.fromTo(
     targetElement2,
     {
       backgroundColor: '#45693A',
@@ -66,7 +72,7 @@ $('.section.align-top').each(function () {
   let triggerElement = $(this)
   let targetElement = $(text.words)
 
-  let tl2 = gsap.timeline({
+  let tl3 = gsap.timeline({
     scrollTrigger: {
       trigger: triggerElement,
       // trigger element - viewport
@@ -76,7 +82,7 @@ $('.section.align-top').each(function () {
       pin: '.quote-wrapper',
     },
   })
-  tl2.from(targetElement, {
+  tl3.from(targetElement, {
     opacity: 0.3,
     stagger: 1,
     ease: 'none',
@@ -88,7 +94,7 @@ $('.section.is--grid').each(function () {
   let triggerElement = $(this)
   let targetElement = $('body')
 
-  let tl6 = gsap.timeline({
+  let tl4 = gsap.timeline({
     scrollTrigger: {
       trigger: triggerElement,
       // trigger element - viewport
@@ -97,7 +103,7 @@ $('.section.is--grid').each(function () {
       scrub: 1,
     },
   })
-  tl6.fromTo(
+  tl4.fromTo(
     targetElement,
     {
       backgroundColor: '#ccd197',
@@ -115,7 +121,7 @@ $('.section.is--vietnam').each(function () {
   let triggerElement = $(this)
   let targetElement = $('.absolute-image')
 
-  let tl10 = gsap.timeline({
+  let tl5 = gsap.timeline({
     scrollTrigger: {
       trigger: triggerElement,
       // trigger element - viewport
@@ -124,7 +130,7 @@ $('.section.is--vietnam').each(function () {
       scrub: true,
     },
   })
-  tl10.from(targetElement, {
+  tl5.from(targetElement, {
     y: '100%',
   })
 })
