@@ -7,14 +7,14 @@ import $ from 'jquery'
 
 gsap.registerPlugin(ScrollTrigger, SplitText, ScrambleText)
 
-let text = new SplitText('.quote', {
-  type: 'words',
-})
-
 document.addEventListener('DOMContentLoaded', function () {
   let body = document.querySelector('body')
   body.style.backgroundColor = '#45693A'
   body.style.color = '#ccd197'
+})
+
+let text = new SplitText('.quote', {
+  type: 'words',
 })
 
 /* Scrollbar animations*/
@@ -180,12 +180,33 @@ $('.scramble__text').each(function () {
   })
 })
 
+/* Rifle animation */
+
+$('.section.is-bechar').each(function () {
+  let triggerElement = $(this)
+  let targetElement = $('.rifle__embed')
+
+  let tl11 = gsap.timeline({
+    scrollTrigger: {
+      trigger: triggerElement,
+      // trigger element - viewport
+      start: 'top 20%',
+      end: 'top top',
+      scrub: true,
+    },
+  })
+  tl11.from(targetElement, {
+    rotateZ: '50deg',
+    y: '100%',
+  })
+})
+
 /* Bullet section full screen image */
-$('.bullet__section').each(function () {
+/* $('.bullet__section').each(function () {
   let triggerElement = $(this)
   let targetElement = $('.bullet-image__wrap')
 
-  let tl10 = gsap.timeline({
+  let tl12 = gsap.timeline({
     scrollTrigger: {
       trigger: triggerElement,
       // trigger element - viewport
@@ -194,9 +215,69 @@ $('.bullet__section').each(function () {
       scrub: true,
     },
   })
-  tl10.from(targetElement, {
-    width: '100%',
-    borderTopLeftRadius: '0rem',
-    borderTopRightRadius: '0rem',
+  tl12.to(targetElement, {
+    width: '33.33%',
+    borderTopLeftRadius: '12.5rem',
+    borderTopRightRadius: '12.5rem',
+  })
+}) */
+
+/* H2 animations */
+
+// Sélectionnez vos éléments h2
+const h2Elements = document.querySelectorAll('h2')
+
+// Parcourez chaque élément h2
+h2Elements.forEach((h2Element) => {
+  // Divisez le texte en lettres individuelles avec SplitText
+  const splitText = new SplitText(h2Element, {
+    type: 'chars',
+  })
+
+  // Créez une timeline pour l'animation
+  const tl = gsap.timeline({ paused: true })
+
+  // Animer chaque lettre
+  tl.from(splitText.chars, {
+    yPercent: -100,
+    opacity: 0,
+    stagger: 0.01,
+    ease: 'power.inOut',
+  })
+
+  // Créez un scrollTrigger pour déclencher l'animation lorsque l'élément h2 entre dans la vue
+  gsap.to(h2Element, {
+    scrollTrigger: {
+      trigger: h2Element,
+      start: 'top 80%',
+      onEnter: () => tl.play(), // Démarrez l'animation lorsque l'élément est dans la vue
+    },
+  })
+})
+
+/* Quote animations 2 */
+
+const splitText2 = new SplitText('.quote.padding--small.is-second', {
+  type: 'words',
+})
+
+$('.section.is-quote').each(function () {
+  let triggerElement = $(this)
+  let targetElement = $(splitText2.words)
+
+  let tl13 = gsap.timeline({
+    scrollTrigger: {
+      trigger: triggerElement,
+      // trigger element - viewport
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: true,
+      pin: '.quote-wrapper-content',
+    },
+  })
+  tl13.from(targetElement, {
+    opacity: 0.3,
+    stagger: 1,
+    ease: 'none',
   })
 })
