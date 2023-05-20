@@ -7,11 +7,12 @@ import $ from 'jquery'
 
 gsap.registerPlugin(ScrollTrigger, SplitText, ScrambleText)
 
-document.addEventListener('DOMContentLoaded', function () {
-  let body = document.querySelector('body')
-  body.style.backgroundColor = '#45693A'
-  body.style.color = '#ccd197'
-})
+window.onload,
+  function () {
+    let body = document.querySelector('body')
+    body.style.backgroundColor = '#45693A'
+    body.style.color = '#ccd197'
+  }
 
 let text = new SplitText('.quote', {
   type: 'words',
