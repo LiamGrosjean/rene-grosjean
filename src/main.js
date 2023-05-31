@@ -96,7 +96,7 @@ function init() {
       },
     })
     tl6.to(targetElement, {
-      marginTop: '-6.5rem',
+      y: '-6.5rem',
     })
   })
 
